@@ -1,0 +1,92 @@
+Conceptualization with ChatGPT: He uses ChatGPT's reasoning model to explore different architectures, backends, and tradeoffs for his app idea.
+Environment Setup: He asks ChatGPT to help set up his development environment based on his chosen architecture.
+Detailed Requirements: He creates a detailed product requirements document (PRD) in markdown format with ChatGPT's help.
+AI-Powered Coding with Cursor: He uses Cursor, an AI IDE, and its "Composer" feature to generate code for his app feature by feature.
+Iterative Bug Fixing: He uses Cursor to identify and fix bugs by providing visual feedback and instructions, or by directly asking it to fix the issue.
+Manual Intervention: For complex bugs that the AI can't fix, he uses his own developer skills to debug and refine the code.
+
+Conceptualization with ChatGPT:
+
+"I want to build a mobile app that [explains the app's purpose]. Considering I'm using Swift, what are some suitable backend options and their pros and cons?"
+"What are the tradeoffs between using Firebase and a custom backend with Node.js for this app?"
+"Okay, I've decided to go with [chosen backend]. Can you help me set up my Xcode project and install the necessary dependencies?"
+2. Detailed Requirements with ChatGPT:
+
+"I'm building a [app description] app with Swift and [chosen backend]. It should have these features: [lists all the features]. Can you write a product requirements document in markdown format based on this information?"
+3. AI-Powered Coding with Cursor:
+
+"Let's start building the user interface for the login screen. It should have a text field for username, a password field, and a login button."
+"Now let's add the logic to handle user authentication when the login button is pressed."
+4. Iterative Bug Fixing with Cursor:
+
+[pastes image of the bug] "The login button isn't responding when I click it. Can you see what's wrong with the code?"
+"The app is crashing when I try to [perform an action]. Can you fix this?"
+
+
+Phase 1: Planning and Setup
+
+Initial Architectural Exploration (ChatGPT - 01 model)
+
+Purpose: To brainstorm and understand the potential architectures, backend options, and their respective trade-offs.
+Prompt Example: "I want to build a mobile app that allows users to share short video clips with their friends. It should also have a feature for live streaming. What are some possible architectures I could use? What backend services would be suitable (e.g., Firebase, AWS, Azure)? What are the benefits and drawbacks of each option?"
+Outcome: A list of potential architectures, backend options, and their pros and cons.
+Decision and Environment Setup (ChatGPT - 01 model)
+
+Purpose: To finalize the architecture and backend choices and get step-by-step guidance on setting up the development environment.
+Prompt Example: "Based on our previous discussion, I've decided to use a React Native architecture with Firebase as the backend. Can you guide me through setting up my development environment on macOS? This includes installing Node.js, React Native CLI, Xcode (if needed), and configuring Firebase."
+Outcome: A fully configured development environment ready for coding.
+Phase 2: Detailed Requirements and Project Structuring
+
+Detailed Product Requirements (ChatGPT - 01 model)
+
+Purpose: To create a comprehensive Product Requirements Document (PRD) in Markdown format. This document will serve as a blueprint for development.
+
+Prompt Example:
+"I need a detailed Product Requirements Document (PRD) for the video-sharing app. It should include:
+
+App Name: (e.g., ClipShare)
+Overview: A brief description of the app.
+Target Audience: (e.g., young adults, social media users)
+Features:
+User Authentication (email/password, social logins)
+Video Upload and Sharing
+Live Streaming
+User Profiles
+Following/Follower System
+Feed of videos from followed users
+Liking and Commenting
+Search Functionality
+Notifications (likes, comments, new followers)
+Technical Specifications:
+Frontend: React Native
+Backend: Firebase
+Design Considerations: (e.g., modern, intuitive UI)
+Please generate this PRD in Markdown format and save it as product_requirements.md."
+
+Outcome: A product_requirements.md file that details all aspects of the app.
+
+Phase 3: Iterative Development with AI Assistance
+
+Code Generation (Cursor with Composer)
+
+Purpose: To generate code for individual features or components of the app, guided by the PRD.
+Example:
+Open the project in Cursor.
+Open Cursor's Composer.
+Reference the PRD: "Using the product_requirements.md as a guide, let's start building the User Authentication feature."
+Specify the component: "Generate the React Native code for a Login screen with email/password and social login buttons (Google, Facebook). It should integrate with Firebase Authentication."
+Outcome: Initial code for the specified feature, integrated into the project.
+Bug Fixing and Refinement (Cursor with Composer)
+
+Purpose: To identify and fix bugs, improve code quality, and refine the app's behavior.
+Example:
+Take a screenshot of the bug or unexpected behavior.
+Paste the screenshot into Cursor's Composer chat.
+Explain the issue: "I'm getting an error when trying to log in with Google. The error message says 'Firebase: Error (auth/account-exists-with-different-credential)'. Can you help me fix this?"
+Alternatively: "The login screen UI is misaligned on smaller devices. Can you suggest a fix to make it responsive?"
+Outcome: Resolved bugs, improved code, and a more polished user experience.
+Iterate: Repeat steps 4 and 5 for each feature and component in the PRD, iteratively building, testing, and refining the app.
+
+Phase 4: Deployment and Beyond
+
+This phase is outside the scope of the original workflow. But this is where you would deploy your app using traditional development practices, and then monitor and maintain your application, and continue to use AI to help you add features.

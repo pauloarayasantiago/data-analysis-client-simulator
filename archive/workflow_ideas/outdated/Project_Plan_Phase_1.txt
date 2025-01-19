@@ -1,0 +1,163 @@
+Project Plan: Phase 1 - Scenario and Dataset Generation Web App
+
+I. Core Functionality & Features (MVP):
+
+Scenario Generation:
+
+The application will present a simulated client brief.
+
+Each brief will include:
+
+Client Description: A brief background of the client or organization.
+
+Business Problem/Objective: A clear statement of the problem they need the data analyst to address.
+
+Data Provided: A description of the dataset being provided (number of columns, types of data, potential sources).
+
+Specific Tasks: A list of tasks the data analyst should perform (e.g., "Identify key trends in customer behavior," "Predict customer churn," "Analyze sales performance by region").
+
+Potential Challenges/Unexpected Elements: (This can be subtle in the initial phase) Hints of potential data quality issues or complexities to be discovered.
+
+Dataset Generation:
+
+Based on the generated scenario, a realistic CSV dataset will be created.
+
+The dataset will align with the "Data Provided" description in the scenario.
+
+It will include realistic data entries, including potential inconsistencies, missing values, or outliers relevant to the task.
+
+User Interface:
+
+Simple and clean web page.
+
+Clear title and brief description of the application.
+
+A "Generate Scenario" button.
+
+A dedicated area to display the generated scenario brief.
+
+A link or download button to access the generated CSV dataset.
+
+II. Technology Stack:
+
+Given your preference for Python and the use of the Gemini API, here's a suggested stack for this initial phase:
+
+Back-End (Scenario and Data Generation):
+
+Python: Your preferred language, excellent for data manipulation and AI interactions.
+
+Flask: A lightweight and flexible web framework perfect for building this simple initial application. It's easy to learn and integrate.
+
+Gemini API (via Google's google-generativeai library): To generate the client scenarios and potentially assist in crafting the data structure. You can prompt Gemini to create realistic client descriptions, business problems, and even suggest data fields.
+
+Pandas: A powerful Python library for data manipulation and creating DataFrames, which can then be easily exported to CSV. This will be crucial for generating the datasets with realistic (and imperfect) data.
+
+Potentially Faker: A Python library that generates fake data (names, addresses, dates, etc.). This can be helpful for populating the datasets with realistic-looking information.
+
+Front-End (User Interface):
+
+HTML: For structuring the web page.
+
+CSS (e.g., Tailwind CSS or simple custom CSS): For styling the page and making it visually appealing. Tailwind CSS is a good option for rapid styling without writing much custom CSS.
+
+JavaScript (Minimal): Likely only needed for handling the "Generate Scenario" button click and potentially for downloading the CSV file.
+
+III. Development Steps & Agile Approach:
+
+We'll use an iterative approach, focusing on getting the core functionality working first.
+
+Setup and Environment:
+
+Set up your Python development environment.
+
+Install necessary libraries (Flask, google-generativeai, Pandas, potentially Faker). Use a requirements.txt file to manage dependencies.
+
+Initialize a Git repository for version control.
+
+Scenario Generation Logic:
+
+Prompt Engineering for Gemini: Experiment with different prompts for the Gemini API to generate realistic client scenarios. Think about how to structure your prompts to get the desired components (client description, problem, data description, tasks).
+
+Template-Based Approach (Optional): You could also create templates for different types of scenarios and use Gemini to fill in the details or variations within those templates.
+
+Data Generation Logic:
+
+Schema Design: Based on the generated scenario (especially the "Data Provided" section), design the schema (column names and data types) for the CSV dataset.
+
+Data Population:
+
+Gemini for Data Ideas: You might even use Gemini to suggest realistic data entries or distributions for each column based on the scenario.
+
+Pandas for Data Creation: Use Pandas to create DataFrames with the defined schema.
+
+Faker for Realistic Data: Integrate Faker to generate plausible values for various fields.
+
+Introducing Imperfections: Intentionally introduce missing values (using None or NaN), outliers (values outside the expected range), and inconsistencies (e.g., different date formats) to make the data realistic.
+
+Flask Web Application Development:
+
+Create Flask Routes: Define a route (e.g., /) that, when accessed, triggers the scenario and data generation process.
+
+Integrate Scenario and Data Generation: When the "Generate Scenario" button is clicked (or the route is accessed), call your scenario generation and data generation functions.
+
+Display Scenario: Pass the generated scenario text to your HTML template for display.
+
+Generate and Provide CSV Download: Create the CSV file using Pandas and provide a way for the user to download it (e.g., using send_file in Flask).
+
+Front-End Design:
+
+Create a simple HTML template to display the scenario and the download link.
+
+Use CSS to style the page for a clean and easy-to-understand interface.
+
+Testing:
+
+Manually test the application by generating multiple scenarios to ensure the logic works correctly and the generated data is relevant and contains realistic imperfections.
+
+Check that the CSV download works as expected.
+
+IV. Success Metrics (for your Solo Development):
+
+Functionality Completion: Successfully generating scenarios with all the intended components.
+
+Data Realism: The generated datasets contain realistic-looking data with relevant imperfections for data analysis practice.
+
+Ease of Use: The web interface is simple and intuitive to use for generating scenarios.
+
+Scenario Variety: The ability to generate diverse scenarios covering different business problems and data types.
+
+Your Learning and Skill Development: Track what you learn during the development process, new technologies you explore, and challenges you overcome.
+
+Self-Evaluation Form (Example Questions):
+
+On a scale of 1 to 5, how realistic do you find the generated client scenarios?
+
+On a scale of 1 to 5, how realistic and challenging is the generated data?
+
+Are the tasks defined in the scenario clear and actionable?
+
+Did you encounter any unexpected or interesting challenges in the generated datasets?
+
+How well does the application meet your current needs for practicing data analysis skills?
+
+What are the biggest areas for improvement in the next iteration?
+
+V. Future Enhancements (Acknowledging Your Vision):
+
+It's good to keep your future goals in mind:
+
+Interactive AI Client: This will involve more advanced NLP and dialogue management capabilities. You might explore libraries like Rasa or develop custom logic for handling conversations.
+
+Feedback on Analyst Work: This is a complex area that could involve:
+
+Rule-based feedback: Defining rules for common mistakes or best practices.
+
+AI-powered feedback: Potentially using another AI model to evaluate the analyst's approach or results (this is more advanced).
+
+Moving Forward:
+
+Start with the core functionality of generating scenarios and datasets. Focus on making this part work well before moving on to the more complex interactive features. Your choice of Python and the Gemini API is a good starting point. Flask will allow you to quickly build the web interface you need for this initial phase.
+
+Remember to use version control (Git) from the beginning. It will be invaluable for tracking your progress and managing changes.
+
+This detailed plan should give you a solid foundation to begin building your AI-powered web application. Let me know if you have any more questions as you start developing!

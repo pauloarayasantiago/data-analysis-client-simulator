@@ -1,0 +1,9 @@
+Ai Generated Business Tasks for Data Analysts
+
+Ai training actos that simulate a client in for data analysis
+
+Act as client:
+Generate realistic documents that chracterize the client and their problem (use problems based on real world problems or invent a problem with a synthetic dataset which must also be generated)
+Include fictional demands, caveats, surprises. Implement the unpredictabilty of a real world client,
+The clients have diverse and unpredictable personalities.
+Take into account that the data analyst is using Ai to potentiate the project.
