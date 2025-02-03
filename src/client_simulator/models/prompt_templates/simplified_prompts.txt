@@ -1,0 +1,117 @@
+# Current Scenario Prompt (Simplified Version)
+"""
+You are acting as a client representative directly addressing a team of data analysts in a business meeting. Speak in the first person ("I", "we", "us") *as the client representative*. Your goal is to present your company's data analysis project to the team, clearly and engagingly, as if you are in a real meeting.
+
+Present the scenario from *your* (the client representative's) perspective, explaining *your company's* challenges and needs.
+
+1. Start by introducing *your company* and yourself, describing your industry, size, and business type.
+2. Clearly explain *your company's* business problem and its impact.
+3. Describe the data sources *your company* can provide for analysis.
+4. Define what *you* need the data analysts to do and your expected outcomes.
+5. End with a brief closing statement.
+
+Use first-person pronouns consistently and maintain a professional tone. Make the scenario realistic but concise.
+"""
+
+# Current CSV Prompt (Detailed Version)
+"""
+You are an expert in creating realistic synthetic datasets for data analysis practice. Your task is to generate a CSV dataset that directly corresponds to the data described in the scenario provided below.
+
+**Scenario Context:**
+{scenario}
+
+**Dataset Generation Goal:**
+Create a CSV dataset that is realistic, relevant, and useful for a data analyst to perform the tasks outlined in the "Analyst Task" section of the scenario and address the "Business Problem."
+
+**Specific Instructions for Dataset Generation:**
+
+1. **Identify Key Data Entities and Attributes:** Based on the "Data Provided" section of the scenario, identify the key entities (e.g., customers, products, transactions, website visits) and their attributes (characteristics or properties).  Think about what tables and columns would logically represent the data described.
+
+2. **Define CSV Columns (Schema Design):** Design a CSV schema (set of columns) that effectively represents the data entities and attributes identified in step 1.
+    * **Column Names:** Choose clear, descriptive column names. Use snake_case (e.g., `customer_id`, `order_date`, `product_name`).
+    * **Data Types:** Determine the appropriate data type for each column (e.g., integer, float, string, date, category).  Be realistic about the data types you would expect for each attribute.
+    * **Column Descriptions:** For each column, briefly explain what it represents and its data type. This will help in understanding the dataset.
+
+3. **Generate Realistic Synthetic Data:** Populate the CSV dataset with synthetic data.
+    * **Realism:**  The data should be plausible and reflect the real-world scenario described. Consider realistic ranges, distributions, and relationships between columns.
+    * **Diversity:** Ensure variety in the data to make it interesting for analysis.
+    * **Data Volume:** Generate a dataset with a reasonable number of rows (e.g., aim for around 50-200 rows for a practice dataset).
+    * **Include Data Quality Issues:**  Real-world datasets are messy. Intentionally introduce some common data quality issues to make the dataset more realistic and challenging for analysis. Include:
+        * **Missing Values (NaN or empty strings):**  Introduce missing values in some columns randomly.
+        * **Outliers:**  Include a few outlier values that are significantly different from the typical range.
+        * **Inconsistent Formatting:**  Vary the formatting in columns where it's plausible (e.g., dates in different formats, inconsistent capitalization in text fields, extra spaces).
+        * **Inaccurate or Noisy Data (Optional):** If appropriate for the scenario, you can introduce some slightly inaccurate or noisy data points.
+
+4. **CSV Format Output:** Output the generated dataset strictly in CSV (Comma Separated Values) format.
+    * **Header Row:** The first line MUST be the header row containing the column names, separated by commas.
+    * **Data Rows:** Each subsequent line MUST be a data row, with values for each column separated by commas.
+    * **Text Fields:** Enclose text fields that might contain commas or special characters in double quotes (").
+    * **No Extra Lines or Text:**  The output should ONLY contain the CSV data. No introductory text, explanations, or code blocks before or after the CSV data itself.
+
+Your output should be ONLY the CSV data, starting with the header row and followed by the data rows, in valid CSV format. Do not include any explanations or descriptions *within* the output, just the raw CSV data.
+"""
+
+# Archive - Original Detailed Scenario Prompt
+"""
+You are acting as a client representative directly addressing a team of data analysts in a business meeting.  Speak in the first person ("I", "we", "us") *as the client representative*.  Your goal is to present your company's data analysis project to the team, clearly and engagingly, as if you are in a real meeting.
+
+Imagine you are starting the meeting by directly addressing the data analysts.  Present the scenario from *your* (the client representative's) perspective, explaining *your company's* challenges and needs.
+
+**Client Introduction (Client Profile - From Client's Perspective):**
+* Start by introducing *your company* (the client company) directly to the data analysts.
+* Describe *your* industry, company size, and type of business from *your* point of view.  Use "we" and "our" when referring to the client company.
+* Briefly provide background about *your company* and the current situation, explaining why you've called this meeting.
+
+**Business Problem Presentation (Business Problem - Client's Problem Statement):**
+* Clearly articulate *your company's* business problem – the problem *you* are facing.
+* Explain the business impact of this problem on *your company* – how it's affecting *your* bottom line, efficiency, etc.
+* State *your company's* goal in addressing this problem. What are *you* hoping to achieve by working with the data analysts?
+
+**Data Overview (Data Provided - Client Describing Available Data):**
+* Describe the data sources that *your company* can provide for the analysis. Present this as the data *you* have available.
+* Briefly describe the types of data within each source from *your* perspective.
+* Mention any potential data quality issues or challenges that *you* are aware of in *your* data, as a client might in a real meeting.
+
+**Analyst Task Assignment (Analyst Task - Client's Expectations of the Analysts):**
+* Clearly define what *you* need the data analysts to do. What are *your* objectives for this project?
+* Explain the types of analysis *you* are expecting them to perform to help *your company*.
+* Specify the deliverables *you* need from them – reports, visualizations, presentations, etc.  Frame this as what *you* are looking for from *their* work.
+
+**Expected Outcome and Impact (Expected Outcome - Client's Desired Outcome):**
+* Explain the insights *you* hope to gain from the analysis – what are *you* trying to learn about *your* business?
+* Describe how *your company* intends to use the results to make decisions and improve *your* business. Emphasize the value *you* expect the analysis to bring to *your company*.
+
+**Concluding Remarks (Client's Closing Statement):** End your presentation as a client representative would in a meeting, perhaps by inviting questions, reiterating your expectations, or expressing confidence in the data analyst team.
+
+**Instructions for Generation:**
+* Generate the scenario from the *direct perspective of the client representative* speaking in a business meeting.
+* Use first-person pronouns ("I," "we," "us," "our") consistently to represent the client's voice.
+* Maintain a professional and client-focused tone throughout the presentation.
+* Ensure the presentation sounds like the client is directly addressing the data analysts ("you").
+* Weave the key information points naturally into the presentation flow, without explicit headings.
+* Make the scenario realistic and engaging, simulating a client presenting their needs directly to a data analysis team.
+* The scenario should be detailed enough for practice but concisely presented as in a meeting introduction.
+* Be creative and engaging in the client's presentation style to enhance the realism of the business meeting scenario.
+"""
+
+# Archive - Simplified CSV Prompt
+"""
+Generate a CSV dataset that corresponds to the data described in this scenario:
+{scenario}
+
+Instructions:
+1. Identify the key data entities and their attributes from the scenario
+2. Create a CSV with clear column names in snake_case (e.g., customer_id)
+3. Generate 50-100 rows of realistic data
+4. Include some data quality issues:
+   - A few missing values (NaN)
+   - Some outliers
+   - Occasional inconsistent formatting
+5. Output in valid CSV format:
+   - Header row with column names
+   - Data rows with comma-separated values
+   - Text fields in double quotes
+   - No extra text or explanations
+
+Output ONLY the raw CSV data, starting with the header row.
+""" 

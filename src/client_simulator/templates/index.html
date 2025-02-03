@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Analysis Client Simulator</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/styles.css') }}" rel="stylesheet">
+    <meta name="description" content="Generate realistic client scenarios for data analysis practice">
+    <meta name="theme-color" content="#6366f1">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <h1>Data Analysis Client Simulator</h1>
+                <p class="header-subtitle">Generate realistic client scenarios for data analysis practice and improve your skills</p>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+        <div class="card action-card">
+            <button id="generateBtn" class="btn">Generate New Client</button>
+            <p class="text-gray-600" style="margin-top: 1.5rem; font-size: 0.875rem;">Click to generate a new client scenario with realistic data analysis requirements</p>
+            <div id="loadingContainer" class="loading-container" style="display: none;">
+                <div class="spinner"></div>
+                <span id="loadingText">Generating... 0%</span>
+            </div>
+        </div>
+
+        <div id="clientOutput" class="card animate-fade-in" style="display: none; opacity: 0;">
+            <div class="card-header">
+                <div>
+                    <h3 style="color: var(--gray-900); margin: 0;">Generated Client Profile</h3>
+                    <p class="text-gray-600" style="margin-top: 0.5rem; font-size: 0.875rem;">A detailed description of your client's background and requirements</p>
+                </div>
+            </div>
+            <div id="clientContent" style="white-space: pre-wrap; line-height: 1.8;"></div>
+        </div>
+
+        <div id="csvOutput" class="card animate-fade-in" style="display: none; opacity: 0;">
+            <div class="card-header">
+                <div>
+                    <h3 style="color: var(--gray-900); margin: 0;">Generated Dataset</h3>
+                    <p class="text-gray-600" style="margin-top: 0.5rem; font-size: 0.875rem;">The synthetic dataset generated for this scenario</p>
+                </div>
+                <div class="card-actions">
+                    <button id="downloadCsvBtn" class="btn-icon" title="Download CSV">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/>
+                        </svg>
+                        <span>Download CSV</span>
+                    </button>
+                </div>
+            </div>
+            <div class="table-container">
+                <table id="csvTable" class="data-table"></table>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        function downloadCSV(csvData, filename = 'dataset.csv') {
+            const blob = new Blob([csvData], { type: 'text/csv;charset=utf-8;' });
+            const link = document.createElement('a');
+            if (navigator.msSaveBlob) { // IE 10+
+                navigator.msSaveBlob(blob, filename);
+            } else {
+                link.href = URL.createObjectURL(blob);
+                link.download = filename;
+                link.style.display = 'none';
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+            }
+        }
+
+        function parseCSV(csv) {
+            const lines = csv.trim().split('\n');
+            const headers = lines[0].split(',').map(header => 
+                header.trim().replace(/^"(.*)"$/, '$1')
+            );
+            
+            const rows = lines.slice(1).map(line => {
+                const values = [];
+                let inQuotes = false;
+                let currentValue = '';
+                
+                for (let char of line) {
+                    if (char === '"') {
+                        inQuotes = !inQuotes;
+                    } else if (char === ',' && !inQuotes) {
+                        values.push(currentValue.trim());
+                        currentValue = '';
+                    } else {
+                        currentValue += char;
+                    }
+                }
+                values.push(currentValue.trim());
+                
+                return values.map(value => value.replace(/^"(.*)"$/, '$1'));
+            });
+            
+            return { headers, rows };
+        }
+
+        function renderTable(csvData) {
+            const table = document.getElementById('csvTable');
+            const { headers, rows } = parseCSV(csvData);
+            
+            // Create header
+            const thead = document.createElement('thead');
+            const headerRow = document.createElement('tr');
+            headers.forEach(header => {
+                const th = document.createElement('th');
+                th.textContent = header;
+                headerRow.appendChild(th);
+            });
+            thead.appendChild(headerRow);
+            
+            // Create body
+            const tbody = document.createElement('tbody');
+            rows.forEach(row => {
+                const tr = document.createElement('tr');
+                row.forEach(cell => {
+                    const td = document.createElement('td');
+                    td.textContent = cell;
+                    tr.appendChild(td);
+                });
+                tbody.appendChild(tr);
+            });
+            
+            // Clear and update table
+            table.innerHTML = '';
+            table.appendChild(thead);
+            table.appendChild(tbody);
+
+            // Setup download button
+            const downloadBtn = document.getElementById('downloadCsvBtn');
+            downloadBtn.onclick = () => downloadCSV(csvData);
+        }
+
+        let progressInterval;
+        let progress = 0;
+
+        function startProgress() {
+            const loadingContainer = document.getElementById('loadingContainer');
+            const loadingText = document.getElementById('loadingText');
+            loadingContainer.style.display = 'inline-flex';
+            
+            progress = 0;
+            progressInterval = setInterval(() => {
+                if (progress < 90) {
+                    progress += Math.random() * 15;
+                    progress = Math.min(90, progress);
+                    loadingText.textContent = `Generating... ${Math.round(progress)}%`;
+                }
+            }, 500);
+        }
+
+        function stopProgress() {
+            const loadingContainer = document.getElementById('loadingContainer');
+            const loadingText = document.getElementById('loadingText');
+            
+            clearInterval(progressInterval);
+            loadingText.textContent = 'Generating... 100%';
+            
+            setTimeout(() => {
+                loadingContainer.style.display = 'none';
+                progress = 0;
+            }, 500);
+        }
+
+        document.getElementById('generateBtn').addEventListener('click', async () => {
+            const generateBtn = document.getElementById('generateBtn');
+            generateBtn.disabled = true;
+            
+            startProgress();
+
+            // Hide any existing error messages
+            const existingErrors = document.querySelectorAll('.error');
+            existingErrors.forEach(error => error.remove());
+
+            try {
+                const response = await fetch('/generate', {
+                    method: 'POST',
+                    headers: {
+                        'Accept': 'application/json'
+                    }
+                });
+                
+                const data = await response.json();
+
+                if (data.status === 'success') {
+                    // Show client data with animation
+                    const clientOutput = document.getElementById('clientOutput');
+                    clientOutput.style.display = 'block';
+                    document.getElementById('clientContent').textContent = data.client_data;
+                    requestAnimationFrame(() => {
+                        clientOutput.style.opacity = '1';
+                    });
+
+                    // Show CSV data with animation
+                    const csvOutput = document.getElementById('csvOutput');
+                    csvOutput.style.display = 'block';
+                    renderTable(data.csv_data);
+                    requestAnimationFrame(() => {
+                        csvOutput.style.opacity = '1';
+                    });
+                } else {
+                    showError('Error: ' + data.message);
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                showError('An error occurred while generating the client profile.');
+            } finally {
+                generateBtn.disabled = false;
+                stopProgress();
+            }
+        });
+
+        function showError(message) {
+            const errorMessage = document.createElement('div');
+            errorMessage.className = 'card error animate-fade-in';
+            errorMessage.innerHTML = `
+                <div style="display: flex; align-items: center; gap: 0.75rem;">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                        <path d="M10 18a8 8 0 100-16 8 8 0 000 16zM10 6v4m0 2v2" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    </svg>
+                    <span>${message}</span>
+                </div>
+            `;
+            document.querySelector('main').insertBefore(errorMessage, document.querySelector('.card:first-child').nextSibling);
+            
+            setTimeout(() => {
+                errorMessage.style.opacity = '0';
+                setTimeout(() => errorMessage.remove(), 300);
+            }, 5000);
+        }
+    </script>
+</body>
+</html> 
